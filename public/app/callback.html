@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>
+      App Callback
+    </title>
+  </head>
+  <body>
+    <br /><br /><br />
+    <p>You have been redirected back to thee app</p>
+    <p>
+      Attempting to close this window, and show the main window in 3 seconds...
+    </p>
+    <p>If you get stuck here, then the expected issue has occured</p>
+
+    <script>
+      setTimeout(() => {
+        const producer = new BroadcastChannel("done");
+        producer.postMessage("done");
+      }, 3000);
+    </script>
+  </body>
+</html>

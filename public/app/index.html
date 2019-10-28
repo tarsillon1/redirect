@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>
+      App Index
+    </title>
+  </head>
+  <body>
+    <br /><br /><br />
+    <div id="root">
+      <p>This is the main window</p>
+      <p>Hiding this wndow and opening a child window in 3 seconds...</p>
+      <p>If you get stuck here, then an unexpected issue has occured</p>
+    </div>
+
+    <script>
+      let childWindow,
+        currentWindow = fin.desktop.Window.getCurrent();
+
+      const consumer = new BroadcastChannel("done");
+      consumer.onmessage = () => {
+        childWindow.close();
+        currentWindow.show();
+
+        const root = document.getElementById("root");
+        root.innerHTML = `<p>Test complete.</p>
+          <p>If the child window is closed, then the test was successful.</p>`;
+      };
+
+      setTimeout(async () => {
+        await currentWindow.hide();
+
+        const url = window.location.href.split("/")[0] + "/child";
+        childWindow = await fin.Window.create({
+          name: "child",
+          url,
+          defaultWidth: 600,
+          defaultHeight: 400,
+          resizable: false,
+          autoShow: true
+        });
+
+        childWindow.showDeveloperTools();
+      }, 3000);
+    </script>
+  </body>
+</html>

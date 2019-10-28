@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>
+      Redirect Index
+    </title>
+  </head>
+  <body>
+    <br /><br /><br />
+    <p>Redirecting back to app server in 3 seconds...</p>
+    <p>If you get stuck here, then an unexpected issue has occured</p>
+    <form id="redirect" hidden="true" method="POST" action="/redirect"></form>
+
+    <script>
+      setTimeout(() => {
+        const form = document.getElementById("redirect");
+        form.submit();
+      }, 3000);
+    </script>
+  </body>
+</html>
